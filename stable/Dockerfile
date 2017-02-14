@@ -1,5 +1,7 @@
-FROM debian:jessie
-MAINTAINER Sathya Laufer <sathya@homegear.email>
+FROM jsurf/rpi-raspbian:latest
+MAINTAINER Jens Viebig
+
+RUN [ "cross-build-start" ]
 RUN apt-get update && apt-get -y install apt-transport-https wget ca-certificates apt-utils
 RUN wget https://homegear.eu/packages/Release.key && apt-key add Release.key && rm Release.key
 RUN echo 'deb https://homegear.eu/packages/Debian/ jessie/' >> /etc/apt/sources.list.d/homegear.list
@@ -16,3 +18,4 @@ RUN chmod +x /start.sh
 CMD /start.sh
 
 EXPOSE 2001 2002 2003
+RUN [ "cross-build-end" ]
